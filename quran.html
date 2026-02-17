@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القرآن الكريم - نور الهدى</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap">
+    <style>
+        .content-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+        }
+        .item-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #d4af37;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: 0.3s;
+        }
+        .item-card:hover {
+            background: rgba(212,175,55,0.1);
+        }
+        .item-title {
+            font-size: 1.5rem;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        .item-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+        .item-image {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 30px;
+            background: #d4af37;
+            color: #0a192f;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background: #b8960f;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>القرآن الكريم</h1>
+        <a href="index.html" class="back-btn">العودة للرئيسية</a>
+    </div>
+
+    <div class="content-container" id="content-container">
+        <!-- سيتم تحميل المحتوى هنا عبر JavaScript -->
+        <p style="text-align:center;">جاري التحميل...</p>
+    </div>
+
+    <footer>
+        <p>نور الهدى - مشروع إسلامي مفتوح</p>
+    </footer>
+
+    <script>
+        const section = 'quran'; // غيّر في كل صفحة: duas, azkar, images
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('content-container');
+                container.innerHTML = ''; // مسح التحميل
+                const items = data[section];
+                if (items && items.length > 0) {
+                    items.forEach(item => {
+                        if (section === 'images') {
+                            // عرض الصور
+                            const imgDiv = document.createElement('div');
+                            imgDiv.className = 'item-card';
+                            imgDiv.innerHTML = `
+                                <h3 class="item-title">${item.name}</h3>
+                                <img src="${item.url}" alt="${item.name}" class="item-image">
+                            `;
+                            container.appendChild(imgDiv);
+                        } else {
+                            // عرض نصوص أو روابط PDF
+                            const itemDiv = document.createElement('div');
+                            itemDiv.className = 'item-card';
+                            if (item.url) {
+                                // PDF
+                                itemDiv.innerHTML = `
+                                    <h3 class="item-title">${item.name}</h3>
+                                    <a href="${item.url}" target="_blank" style="color:#d4af37;">📥 تحميل الملف</a>
+                                `;
+                            } else {
+                                // نص
+                                itemDiv.innerHTML = `
+                                    <h3 class="item-title">${item.name}</h3>
+                                    <div class="item-content">${item.content}</div>
+                                `;
+                            }
+                            container.appendChild(itemDiv);
+                        }
+                    });
+                } else {
+                    container.innerHTML = '<p style="text-align:center;">لا توجد محتويات بعد.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('خطأ:', error);
+                document.getElementById('content-container').innerHTML = '<p style="color:red;">حدث خطأ في تحميل المحتوى.</p>';
+            });
+    </script>
+</body>
+</html>

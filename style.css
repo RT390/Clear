@@ -1,0 +1,109 @@
+/* إعدادات عامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: linear-gradient(135deg, #0a192f 0%, #1a2f4e 100%);
+    color: #f0f4fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* الهيدر */
+.hero {
+    text-align: center;
+    margin: 30px 0 40px;
+    padding: 20px;
+    border-bottom: 2px solid #c9a96b;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #d4af37;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #b0c4de;
+}
+
+/* شبكة البطاقات */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px 0 40px;
+}
+
+/* تصميم البطاقة */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #d4af37;
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.card-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 6px #d4af37);
+}
+
+.card h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #d4af37;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* فوتر */
+footer {
+    margin-top: auto;
+    padding: 20px;
+    color: #888;
+    font-size: 0.9rem;
+    border-top: 1px solid #2a3f5e;
+    width: 100%;
+    text-align: center;
+}
+
+/* استجابة للهواتف */
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .card h2 {
+        font-size: 1.5rem;
+    }
+}
